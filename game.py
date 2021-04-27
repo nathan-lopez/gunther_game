@@ -1,5 +1,5 @@
 import pygame
-from player import Player1, Player2
+from player import Player
 from fonction_du_jeu import Function
 
 
@@ -11,8 +11,6 @@ class Game:
         # variable qui va nous dire si l'user lance le jeu
         self.on_joue = False
         self.function = Function()
-        self.player1 = Player1()
-        self.player2 = Player2()
 
     def start(self):
         # en change cette variable le jeu demande
@@ -21,7 +19,7 @@ class Game:
     def c_partie(self, screen):
         # on affiche le premier groupe de joueur
         for i in self.function.planjoeur(side="N"):
-            screen.blit(self.player1.image, self.function.dicofinal()[i])
+            screen.blit(Player("N", "assets/coca.png").image, self.function.dicofinal()[i])
         # on affiche le deuxieme groupe de joueur
         for ii in self.function.planjoeur(side="S"):
-            screen.blit(self.player2.image, self.function.dicofinal()[ii])
+            screen.blit(Player("S", "assets/Fanta.jpg").image, self.function.dicofinal()[ii])

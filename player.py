@@ -1,25 +1,23 @@
 import pygame
-
+# from game import Game
 
 pygame.init()
 
 # créartion de la classe player
 
 
-class Player1(pygame.sprite.Sprite):
-    def __init__(self):
+class Player(pygame.sprite.Sprite):
+    def __init__(self, cote, chemin):
         super().__init__()
         self.is_life = True
-        self.image = pygame.image.load("assets/coca.png")
+        self.image = pygame.image.load(chemin)
+        self.cote = cote
         self.image = pygame.transform.scale(self.image, (69, 69))
         self.rect = self.image.get_rect()
+        # instancier la classe move
 
-
-# seconde classe player pour notre deuxieme joueur
-class Player2(pygame.sprite.Sprite):
-    def __init__(self):
-        super().__init__()
-        self.is_life = True
-        self.image = pygame.image.load("assets/Fanta.jpg")
-        self.image = pygame.transform.scale(self.image, (69, 69))
-        self.rect = self.image.get_rect()
+    def is_present(self, x, y):
+        if self.rect.x == x and self.rect.y == y:
+            return True
+        else:
+            return False

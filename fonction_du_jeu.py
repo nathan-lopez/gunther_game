@@ -1,7 +1,3 @@
-import pygame
-# from main import MainGame
-
-pygame.init()
 # ce que nousallons faire
 # differents tableau qui vont nous permettre de referencier chaque cellules
 
@@ -21,7 +17,7 @@ class Function:
         tab = []
         for a in range(0, (len(alpha))):
             c = alpha[a]
-            for bb in range(0, (len(number))):
+            for bb in range(0, len(number)):
                 v = number[bb]
                 chaine = c + str(v)
                 tab.append(chaine)
@@ -40,7 +36,7 @@ class Function:
                 tabf.append(tup)
                 self.y1 += 70
             self.x1 += 70
-        for kk in range(0, (len(key_array))):
+        for kk in range(0, len(key_array)):
             try:
                 self.dico[key_array[kk]] = tabf[kk]
             except IndexError:
