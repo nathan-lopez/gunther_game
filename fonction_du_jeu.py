@@ -62,7 +62,7 @@ class Function:
         for i in array_a:
             if i in dico:
                 del dico[i]
-        # retourne un dictionnaire de reference( coordonées) de jeu où le joeur va joeur
+        # retourne un dictionnaire de toutes les references( coordonées) de jeu où le joeur va joeur
         return dico
 
     # fonction qui nous permettra d'avoir le reference de depart de jeu de nos joeur

@@ -7,10 +7,15 @@ pygame.init()
 
 # classe principale du jeu
 class MainGame:
-    def __init__(self):
+    def __init__(self, tampon):
         self.game = Game()
+        self.tampon = tampon
         # variable de debut de jeu
         self.running = True
+        self.main_is_open = False
+
+    def quite_game(self):
+        pygame.quit()
 
     def run(self):
         # enerer la fenetre du jeu, son titre, sa dimension en hauteur et largeur
@@ -40,7 +45,6 @@ class MainGame:
         play_button_rect.y = ceil(screen.get_height() / 2 - 180)
         # lançons la boucle
         self.boucle_du_jeu(screen, bg, bg2, bg2_rect, banner, banner_rect, play_button, play_button_rect)
-        return bg2_rect
 
     def boucle_du_jeu(self, screen, bg, bg2, bg2_rect, banner, banner_rect, play_button, play_button_rect):
         while self.running:
@@ -56,6 +60,7 @@ class MainGame:
                 screen.blit(banner, (banner_rect.x, 40))
                 screen.blit(play_button, (play_button_rect.x, play_button_rect.y))
 
+
             # mettre à jour la fenetre
             pygame.display.flip()
             # recuperation de different evenement de notre jeu
@@ -63,9 +68,13 @@ class MainGame:
                 # evenement 1 : si l'unitisateur ferme la fenetre X
                 if event.type == pygame.QUIT:
                     self.running = False
-                    pygame.quit()
+                    self.main_is_open = False
+                    self.quite_game()
+                    self.tampon.pygame_is_closed()
+
+
                 # evenement 2 : si l'utilisateur fait un clique
-                elif event.type == pygame.MOUSEBUTTONDOWN:
+                if event.type == pygame.MOUSEBUTTONDOWN:
                     # verfifions si il a cliquer sur notre boutton
                     if play_button_rect.collidepoint(event.pos):
                         # si oui , on met le jeu sur start

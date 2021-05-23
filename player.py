@@ -1,8 +1,6 @@
 import pygame
 # from game import Game
 
-pygame.init()
-
 # créartion de la classe player
 
 
@@ -21,3 +19,10 @@ class Player(pygame.sprite.Sprite):
             return True
         else:
             return False
+    def is_hand(self, x, y):
+        if self.cote == "N":
+            if (self.rect.x - 70 == x and self.rect.y - 70 == y) or (self.rect.x + 70 == x and self.rect.y - 70 == y):
+                return True
+        if self.cote == "S":
+            if (self.rect.x - 70 == x and self.rect.y + 70 == y) or (self.rect.x + 70 == x and self.rect.y + 70 == y):
+                return True

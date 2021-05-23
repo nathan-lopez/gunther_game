@@ -1,22 +1,33 @@
+from tkinter import *
+from tkinter.messagebox import askokcancel
+
 class Launcher:
-    def __init__(self):
-        self.main = MainGame()
-        # #### initialisation de la fenetre tkinter #####
-        self.root = Tk()
-        self.root.geometry("460x350")
-        self.root.minsize(460, 350)
-        self.root.maxsize(460, 350)
-        self.root.config(background='white')
-        self.root.title("Launcher")
-        self.rep = None
-        self.photo = PhotoImage(file="assets/image.png").zoom(20).subsample(22)
-        self.constructeur(self.root, self.photo)
-        self.fermeture()
+    def __init__(self, tampon):
+        self.tampon = tampon
+        self.run = False
+        # self.nb_fen = self.main.compte
+        self.windows()
+
+    def change_run(self):
+        self.run = True
+
+    def windows(self):
+        if self.run:
+            self.root = Tk()
+            self.root.geometry("460x350")
+            self.root.minsize(460, 350)
+            self.root.maxsize(460, 350)
+            self.root.config(background='white')
+            self.root.title("Launcher")
+            self.rep = None
+            self.photo = PhotoImage(file="assets/image.png").zoom(20).subsample(22)
+            self.constructeur(self.root, self.photo)
+            self.fermeture()
+            # verifier le nombre de fois que la fenetre a été appelé
 
     def play(self):
-        # fermer la fenetre tkinter si pygame est lancer
         self.root.destroy()
-        self.main.run()
+        self.tampon.launche_pygame()
 
     def constructeur(self, root, photo):
         largeur = 350
@@ -34,23 +45,12 @@ class Launcher:
         # construction du frame dans lequel on mettra nos bouttons
         fram.grid(row=1, column=2, padx=10)
 
-    def launcher_game(self):
-        self.main = MainGame()
-        self.main.run()
-
     def com_ok(self):
         self.rep = askokcancel("confirmer la fermeture ", "voulez vous quitter le jeu ?")
         if self.rep:
+            self.tampon.fermeture = False
             self.root.quit()
 
     def fermeture(self):
         self.root.protocol("WM_DELETE_WINDOW", self.com_ok)
         self.root.mainloop()
-
-
-# prorgramme principal
-if __name__ == '__main__':
-    from tkinter import *
-    from tkinter.messagebox import askokcancel
-    from main import MainGame
-    Gunther_game = Launcher()
